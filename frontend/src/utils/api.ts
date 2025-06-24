@@ -120,7 +120,7 @@ export const conversionApi = {
     conversionData: ConversionData
   ): Promise<ConversionResult> => {
     const response = await httpClient.post("/conversions", conversionData);
-    return response.data.data;
+    return response.data.data.conversion;
   },
 
   getSupportedCurrencies: async (): Promise<Currency[]> => {

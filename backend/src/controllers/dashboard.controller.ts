@@ -13,19 +13,16 @@ export const getDashboardStats = asyncHandler(
 
     const userId = req.user.id;
 
-    // Get total conversions count
     const totalConversions = await prisma.conversion.count({
       where: { userId },
     });
 
-    // Get unique currency pairs count
     const uniquePairs = await prisma.conversion.findMany({
       where: { userId },
       select: { fromCurrency: true, toCurrency: true },
       distinct: ["fromCurrency", "toCurrency"],
     });
 
-    // Get currency statistics
     const fromCurrencyStats = await prisma.conversion.groupBy({
       by: ["fromCurrency"],
       where: { userId },
@@ -40,7 +37,6 @@ export const getDashboardStats = asyncHandler(
       _count: { id: true },
     });
 
-    // Combine and format currency stats
     const currencyMap = new Map<string, CurrencyStats>();
 
     fromCurrencyStats.forEach((stat) => {
@@ -72,7 +68,6 @@ export const getDashboardStats = asyncHandler(
       (a, b) => b.totalConverted - a.totalConverted
     );
 
-    // Get recent conversions
     const recentConversions = await prisma.conversion.findMany({
       where: { userId },
       orderBy: { createdAt: "desc" },
@@ -133,7 +128,6 @@ export const getConversionChartData = asyncHandler(
         startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     }
 
-    // Get conversions by day
     const conversions = await prisma.conversion.findMany({
       where: {
         userId,
@@ -145,7 +139,6 @@ export const getConversionChartData = asyncHandler(
       orderBy: { createdAt: "asc" },
     });
 
-    // Group by date
     const groupedData = conversions.reduce((acc, conversion) => {
       const date = conversion.createdAt.toISOString().split("T")[0];
 

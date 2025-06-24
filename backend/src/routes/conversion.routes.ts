@@ -9,10 +9,8 @@ import { authenticate } from "../middleware/auth.middleware";
 
 const router = Router();
 
-// All routes require authentication
 router.use(authenticate);
 
-// Conversion routes
 router.post("/", createConversion);
 router.get("/", getConversions);
 router.get("/currencies", getSupportedCurrencies);

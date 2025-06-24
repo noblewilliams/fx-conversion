@@ -124,15 +124,25 @@ export function ConversionHistory() {
                 data: [
                   {
                     class: "text-gray-900 dark:text-white",
-                    value: conversion.fromAmount.toLocaleString(),
+                    value:
+                      conversion.fromAmount.toLocaleString() +
+                      " " +
+                      conversion.fromCurrency,
                   },
                   {
                     class: "text-gray-900 dark:text-white",
-                    value: conversion.toAmount.toLocaleString(),
+                    value:
+                      conversion.toAmount.toLocaleString() +
+                      " " +
+                      conversion.toCurrency,
                   },
                   {
                     class: "text-gray-500 dark:text-gray-400",
-                    value: conversion.exchangeRate.toLocaleString(),
+                    value: `1 ${
+                      conversion.fromCurrency
+                    } = ${conversion.exchangeRate.toLocaleString()} ${
+                      conversion.toCurrency
+                    }`,
                   },
                   {
                     class: "text-gray-500 dark:text-gray-400",

@@ -54,7 +54,6 @@ export const createConversion = asyncHandler(
     const { fromCurrency, toCurrency, fromAmount }: ConversionRequest =
       validationResult.data;
 
-    // Get supported currencies
     const supportedCurrencies =
       await exchangeRateService.getSupportedCurrencies();
 
@@ -65,7 +64,6 @@ export const createConversion = asyncHandler(
       throw createError("Unsupported currency", 400);
     }
 
-    // Get exchange rate
     const exchangeRate = await exchangeRateService.getExchangeRate(
       fromCurrency,
       toCurrency
@@ -75,7 +73,6 @@ export const createConversion = asyncHandler(
       exchangeRate
     );
 
-    // Save conversion to database
     const conversion = await prisma.conversion.create({
       data: {
         userId: req.user.id,
