@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  conversions Conversion[]
+
+  @@map("users")
+}
+
+model Conversion {
+  id            String   @id @default(cuid())
+  userId        String
+  fromCurrency  String
+  toCurrency    String
+  fromAmount    Float
+  toAmount      Float
+  exchangeRate  Float
+  createdAt     DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("conversions")
+}
