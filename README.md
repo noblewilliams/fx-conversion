@@ -32,12 +32,12 @@ A modern, fullstack foreign exchange conversion application built with Next.js, 
    Update the `.env` file with your configuration:
 
    ```env
-   PORT=5000
+   PORT=8000
    NODE_ENV=development
    DATABASE_URL="file:./prisma/dev.db"
    JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
    JWT_EXPIRATION=7d
-   FRONTEND_URL=http://localhost:3000
+   FRONTEND_URL=http://localhost:3001
    ```
 
 4. **Set up database**
@@ -73,7 +73,7 @@ A modern, fullstack foreign exchange conversion application built with Next.js, 
    Create a `.env.local` file:
 
    ```env
-   NEXT_PUBLIC_API_URL=http://localhost:5000/api
+   NEXT_PUBLIC_API_URL=http://localhost:8000/api
    ```
 
 4. **Start the development server**
