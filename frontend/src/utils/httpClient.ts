@@ -82,23 +82,4 @@ httpClient.interceptors.response.use(
   }
 );
 
-export const setAuthToken = (token: string): void => {
-  if (typeof window !== "undefined") {
-    Cookies.set("auth_token", token);
-  }
-};
-
-export const clearAuthToken = (): void => {
-  if (typeof window !== "undefined") {
-    Cookies.remove("auth_token");
-  }
-};
-
-export const getAuthToken = (): string | null => {
-  if (typeof window !== "undefined") {
-    return Cookies.get("auth_token") || null;
-  }
-  return null;
-};
-
 export default httpClient;
