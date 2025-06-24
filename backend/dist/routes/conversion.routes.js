@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.conversionRoutes = void 0;
+const express_1 = require("express");
+const conversion_controller_1 = require("../controllers/conversion.controller");
+const auth_middleware_1 = require("../middleware/auth.middleware");
+const router = (0, express_1.Router)();
+exports.conversionRoutes = router;
+router.use(auth_middleware_1.authenticate);
+router.post("/", conversion_controller_1.createConversion);
+router.get("/", conversion_controller_1.getConversions);
+router.get("/currencies", conversion_controller_1.getSupportedCurrencies);
+router.get("/:id", conversion_controller_1.getConversionById);
